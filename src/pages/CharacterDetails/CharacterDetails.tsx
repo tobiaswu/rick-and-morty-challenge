@@ -4,13 +4,47 @@ import styled from "styled-components";
 import { GET_CHARACTER_DETAILS } from "../../services/queries";
 import { CharacterCard } from "../../components/CharacterCard/CharacterCard";
 import { EpisodeBar } from "../../components/EpisodeBar/EpisodeBar";
+import { Episode } from "../../utils/types/types";
 
-export type Episode = {
-  air_date?: string;
-  episode?: string;
-  id?: string;
-  isHeader?: boolean;
-  name: string;
+const CharacterDetails = (props: RouteComponentProps) => {
+  const params = useParams();
+  const id = params.characterId;
+  const { data, error, loading } = useQuery(GET_CHARACTER_DETAILS, {
+    variables: { id },
+  });
+
+  if (error) return <p>Error :(</p>;
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <Container>
+      <Title>Character Details</Title>
+      <Wrapper>
+        <CharacterCard
+          id={id}
+          image={data.character.image}
+          name={data.character.name}
+        />
+        <UDetailsList>
+          <li>Status: {data.character.status}</li>
+          <li>Species: {data.character.species}</li>
+          <li>
+            Type: {data.character.type === "" ? "unknown" : data.character.type}
+          </li>
+          <li>Gender: {data.character.gender}</li>
+        </UDetailsList>
+      </Wrapper>
+
+      <Text>Appears in:</Text>
+      <UList>
+        {data.character.episode.map(({ air_date, id, name }: Episode) => {
+          return (
+            <EpisodeBar key={id} air_date={air_date} id={id} name={name} />
+          );
+        })}
+      </UList>
+    </Container>
+  );
 };
 
 const Wrapper = styled.div`
@@ -55,46 +89,5 @@ const Title = styled.p`
   font-size: 2rem;
   text-align: center;
 `;
-
-const CharacterDetails = (props: RouteComponentProps) => {
-  const params = useParams();
-  const id = params.characterId;
-  const { data, error, loading } = useQuery(GET_CHARACTER_DETAILS, {
-    variables: { id },
-  });
-
-  if (error) return <p>Error :(</p>;
-  if (loading) return <p>Loading...</p>;
-
-  return (
-    <Container>
-      <Title>Character Details</Title>
-      <Wrapper>
-        <CharacterCard
-          id={id}
-          image={data.character.image}
-          name={data.character.name}
-        />
-        <UDetailsList>
-          <li>Status: {data.character.status}</li>
-          <li>Species: {data.character.species}</li>
-          <li>
-            Type: {data.character.type === "" ? "unknown" : data.character.type}
-          </li>
-          <li>Gender: {data.character.gender}</li>
-        </UDetailsList>
-      </Wrapper>
-
-      <Text>Appears in:</Text>
-      <UList>
-        {data.character.episode.map(({ air_date, id, name }: Episode) => {
-          return (
-            <EpisodeBar key={id} air_date={air_date} id={id} name={name} />
-          );
-        })}
-      </UList>
-    </Container>
-  );
-};
 
 export { CharacterDetails };

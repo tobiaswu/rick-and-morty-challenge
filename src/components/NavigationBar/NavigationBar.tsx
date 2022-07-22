@@ -2,6 +2,24 @@ import { Link } from "@reach/router";
 import styled from "styled-components";
 import Logo from "../../assets/images/rick-and-morty-logo.png";
 
+const NavigationBar = () => {
+  return (
+    <>
+      <Wrapper>
+        <Link to="/">
+          <img src={Logo} alt="" />
+        </Link>
+        <div>
+          <StyledLink to="/">My Favorites</StyledLink>
+          <StyledLink to="characters">All Characters</StyledLink>
+          <StyledLink to="episodes">All Episodes</StyledLink>
+        </div>
+      </Wrapper>
+      <hr />
+    </>
+  );
+};
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -20,25 +38,5 @@ const StyledLink = styled(Link)`
     opacity: 75%;
   }
 `;
-
-const Container = styled.div``;
-
-const NavigationBar = () => {
-  return (
-    <Container>
-      <Wrapper>
-        <Link to="/">
-          <img src={Logo} alt="" />
-        </Link>
-        <div>
-          <StyledLink to="/">My Favorites</StyledLink>
-          <StyledLink to="characters">All Characters</StyledLink>
-          <StyledLink to="episodes">All Episodes</StyledLink>
-        </div>
-      </Wrapper>
-      <hr />
-    </Container>
-  );
-};
 
 export { NavigationBar };

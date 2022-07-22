@@ -2,30 +2,6 @@ import { ApolloQueryResult } from "@apollo/client";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
 
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-`;
-
-const Button = styled.button`
-  font-weight: bold;
-  width: 8rem;
-  margin: 0 1rem;
-  background-color: ${(props) => props.theme.colors.turquoise};
-  cursor: pointer;
-  border-radius: 0.5rem;
-
-  :hover {
-    box-shadow: 0 0 15px 5px yellow;
-    opacity: 75%;
-  }
-`;
-
-const Text = styled.p`
-  font-weight: bold;
-`;
-
 interface PageHandlerProps {
   data: any;
   refetch: (
@@ -62,5 +38,29 @@ const PageHandler = ({ data, refetch }: PageHandlerProps) => {
     </ButtonWrap>
   );
 };
+
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+`;
+
+const Button = styled.button`
+  font-weight: bold;
+  width: 8rem;
+  margin: 0 1rem;
+  background-color: ${(props) => props.theme.colors.turquoise};
+  cursor: pointer;
+  border-radius: 0.5rem;
+
+  :hover {
+    box-shadow: 0 0 15px 5px yellow;
+    opacity: 75%;
+  }
+`;
+
+const Text = styled.p`
+  font-weight: bold;
+`;
 
 export { PageHandler };

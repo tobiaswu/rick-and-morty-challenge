@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { EpisodeBar } from "../../components/EpisodeBar/EpisodeBar";
 import { PageHandler } from "../../components/PageHandler/PageHandler";
 import { GET_EPISODES } from "../../services/queries";
-import { Episode } from "../CharacterDetails/CharacterDetails";
+import { Episode } from "../../utils/types/types";
 
 const EpisodeOverview = (props: RouteComponentProps) => {
   const { data, error, loading, refetch } = useQuery(GET_EPISODES, {
@@ -13,15 +13,6 @@ const EpisodeOverview = (props: RouteComponentProps) => {
 
   if (error) return <p>Error :(</p>;
   if (loading) return <p>Loading...</p>;
-
-  const Container = styled.div`
-    padding: 0 2rem;
-  `;
-
-  const Title = styled.p`
-    font-size: 2rem;
-    text-align: center;
-  `;
 
   return (
     <Container>
@@ -40,5 +31,14 @@ const EpisodeOverview = (props: RouteComponentProps) => {
     </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 0 2rem;
+`;
+
+const Title = styled.p`
+  font-size: 2rem;
+  text-align: center;
+`;
 
 export { EpisodeOverview };
