@@ -8,32 +8,7 @@ import {
 import { EpisodeBar } from "../../components/EpisodeBar/EpisodeBar";
 import { GET_EPISODE_DETAILS } from "../../services/queries";
 
-interface EpisodeDetailsProps extends RouteComponentProps {}
-
-const Text = styled.p`
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 2rem;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  justify-items: center;
-`;
-
-const Title = styled.p`
-  font-size: 2rem;
-`;
-
-const EpisodeDetails = (props: EpisodeDetailsProps) => {
+const EpisodeDetails = (props: RouteComponentProps) => {
   const params = useParams();
   const id = params.episodeId;
   const { data, error, loading } = useQuery(GET_EPISODE_DETAILS, {
@@ -63,5 +38,28 @@ const EpisodeDetails = (props: EpisodeDetailsProps) => {
     </Container>
   );
 };
+
+const Text = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  justify-items: center;
+`;
+
+const Title = styled.p`
+  font-size: 2rem;
+`;
 
 export { EpisodeDetails };
